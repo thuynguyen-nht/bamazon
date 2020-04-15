@@ -1,0 +1,27 @@
+{
+  "name": "bamazon",
+  "version": "1.0.0",
+  "description": "Amazon-like App",
+  "main": "bamazonCustomer.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/thuynguyen-nht/bamazon.git"
+  },
+  "keywords": [
+    "bamazon",
+    "amazon-like"
+  ],
+  "author": "ThuyN",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/thuynguyen-nht/bamazon/issues"
+  },
+  "homepage": "https://github.com/thuynguyen-nht/bamazon#readme",
+  "dependencies": {
+    "inquirer": "^7.1.0",
+    "mysql": "^2.18.1"
+  }
+}
