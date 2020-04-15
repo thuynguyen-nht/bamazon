@@ -80,16 +80,21 @@ function start() {
                         ],
                         function (error) {
                             if (error) throw err;
+
+                            console.table("\n====================================================\n")
                             console.log("Order placed successfully!");
                             console.log("Your total: $" + total);
+
+                            console.table("\n====================================================\n")
                             start();
                         }
                     );
                     //this is to check the sql
-                    // console.log(query.sql);
+                    console.log(query.sql);
                 } else {
                     // quantity wasn't enough, so apologize and start over
                     console.log("Insufficient. Try again...");
+                    console.table("\n====================================================\n")
                     start();
                 }
             });
@@ -99,7 +104,9 @@ function start() {
 function checkIfShouldExit(choice) {
     if (choice.toLowerCase() === "q") {
         // Log a message and exit the current node process
-        console.log("Goodbye!");
+        console.table("\n====================================================\n")
+        console.log("Goodbye! Hope to see you again!");
+        console.table("\n====================================================\n")
         process.exit(0);
     }
 }

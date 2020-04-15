@@ -52,7 +52,130 @@ function displayItem() {
         if (err) throw err;
         // Log all results of the SELECT statement
         console.table(res);
+        console.table("\n====================================================\n")
+        startManager();
+    });
+}
 
-        connection.end();
+function lowQuantity() {
+    connection.query("SELECT * FROM products WHERE stock_quantity <= ?", [5], function (err, res) {
+        if (err) throw err;
+        // Log all results of the SELECT statement
+        console.table("\n====================================================\n")
+        console.table(res);
+        console.table("\n====================================================\n")
+        startManager();
+    });
+}
+
+function addQuantity() {
+
+    inquirer
+        .prompt([{
+            name: "chooseID",
+            type: "input",
+            message: "Please enter the Item ID which you want to update the quantity. [or q to quit]",
+            validate: function (value) {
+                // return !isNaN(value) || value.toLowerCase() === "q";
+                if (!isNaN(value) === true) {
+                    return true;
+                } else if (value.toLowerCase() === "q") {
+                    process.exit(0);
+                }
+            }
+        }, {
+            name: "addInv",
+            type: "input",
+            message: "How many you want to add into this item?",
+            validate: function (value) {
+                if (isNaN(value) === false) {
+                    return true;
+                }
+                return false;
+            }
+        }])
+        .then(function (answer) {
+
+            var query = connection.query(
+
+                "UPDATE products SET stock_quantity = stock_quantity + ? WHERE ?",
+                [answer.addInv,
+                    {
+                        item_id: answer.chooseID
+                    }
+                ],
+                function (error) {
+                    if (error) throw err;
+                    console.log("Quantity added!");
+                    console.table("\n====================================================\n")
+                    startManager();
+                }
+            );
+            console.log(query.sql);
+        });
+}
+
+function addProduct() {
+    connection.query("SELECT * FROM products", function (err, results) {
+        if (err) throw err;
+        inquirer
+            .prompt([{
+                    name: "department",
+                    type: "list",
+                    choices: function () {
+                        var departments = [];
+                        for (var i = 0; i < results.length; i++) {
+                            if (departments.indexOf(results[i].department_name) === -1) {
+                                departments.push(results[i].department_name);
+                            }
+                        }
+                        return departments;
+                    },
+                    message: "What department would you like to place your item in?"
+                }, {
+                    name: "item",
+                    type: "input",
+                    message: "What is the item you would like to submit?",
+                },
+                {
+                    name: "price",
+                    type: "input",
+                    message: "What is the price for new item per unit?",
+                    validate: function (value) {
+                        if (isNaN(value) === false) {
+                            return true;
+                        }
+                        return false;
+                    }
+                },
+                {
+                    name: "quantity",
+                    type: "input",
+                    message: "What is the quantity for new item?",
+                    validate: function (value) {
+                        if (isNaN(value) === false) {
+                            return true;
+                        }
+                        return false;
+                    }
+                }
+            ])
+            .then(function (answer) {
+                // when finished prompting, insert a new item into the db with that info
+                connection.query(
+                    "INSERT INTO products SET ?", {
+                        product_name: answer.item,
+                        department_name: answer.department,
+                        price: answer.price,
+                        stock_quantity: answer.quantity
+                    },
+                    function (err) {
+                        if (err) throw err;
+                        console.log("New Item was created successfully!");
+                        // re-prompt the user for if they want to bid or post
+                        startManager();
+                    }
+                );
+            });
     });
 }
