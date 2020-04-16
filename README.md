@@ -33,13 +33,12 @@ Manager will able to choose:
 #### Server
 Any change from Client side through node js will effect the data in the server. In this case, local host has been used as server for this app 
 
-### Demo Video
-[bamazon]: https://youtu.be/k2SK7oYKcQ8
+### Demo
+[Demo Video](https://youtu.be/k2SK7oYKcQ8)
 
-### Contact Me
-[Github]: https://github.com/thuynguyen-nht 
-[Email]: thuynguyen.nht20@gmail.com
-
+### Contact me 
+Github: https://github.com/thuynguyen-nht
+Email: thuynguyen.nht20@gmail.com
 
 
 
