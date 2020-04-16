@@ -34,7 +34,7 @@ Manager will able to choose:
 Any change from Client side through node js will effect the data in the server. In this case, local host has been used as server for this app 
 
 ### Demo
-[Demo Video](https://youtu.be/k2SK7oYKcQ8)
+[Demo Video](https://youtu.be/g8zLdJ5HeXc)
 
 ### Contact me 
 Github: https://github.com/thuynguyen-nht
